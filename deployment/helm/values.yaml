@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  backend:
+    repository: cloudmon-backend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  frontend:
+    repository: cloudmon-frontend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+service:
+  type: ClusterIP
+  backendPort: 8000
+  frontendPort: 80
+
+env:
+  POSTGRES_USER: monitor
+  POSTGRES_PASSWORD: monitorpassword
+  POSTGRES_DB: monitoring_db
+  CELERY_BROKER_URL: redis://redis-service:6379/0

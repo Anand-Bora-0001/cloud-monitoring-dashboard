@@ -86,3 +86,21 @@ class AlertResponse(AlertBase):
 
     class Config:
         from_attributes = True
+
+class CloudResourceBase(BaseModel):
+    provider: str
+    resource_type: str
+    resource_id: str
+    name: str | None = None
+    status: str | None = None
+    parent_id: int | None = None
+
+class CloudResourceCreate(CloudResourceBase):
+    pass
+
+class CloudResourceResponse(CloudResourceBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

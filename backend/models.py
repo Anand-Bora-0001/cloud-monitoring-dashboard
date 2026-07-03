@@ -54,3 +54,38 @@ class Alert(Base):
     message = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     is_resolved = Column(Boolean, default=False)
+
+class CloudResource(Base):
+    __tablename__ = "cloud_resources"
+    id = Column(Integer, primary_key=True, index=True)
+    provider = Column(String, nullable=False) # e.g. AWS, Azure, GCP
+    resource_type = Column(String, nullable=False) # e.g. EC2, ECS, EKS, Lambda, Docker, Kubernetes
+    resource_id = Column(String, unique=True, index=True, nullable=False) # e.g. i-1234567890abcdef0
+    name = Column(String)
+    status = Column(String)
+    parent_id = Column(Integer, ForeignKey("cloud_resources.id"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class ServiceDependency(Base):
+    __tablename__ = "service_dependencies"
+    id = Column(Integer, primary_key=True, index=True)
+    parent_service_id = Column(Integer, ForeignKey("cloud_resources.id"), nullable=False)
+    child_service_id = Column(Integer, ForeignKey("cloud_resources.id"), nullable=False)
+    impact_level = Column(String, default="high") # e.g. high, medium, low
+
+class SyntheticTest(Base):
+    __tablename__ = "synthetic_tests"
+    id = Column(Integer, primary_key=True, index=True)
+    endpoint = Column(String, nullable=False)
+    test_type = Column(String, nullable=False) # e.g. api, login, checkout
+    is_up = Column(Boolean, default=True)
+    latency_ms = Column(Integer)
+    last_checked = Column(DateTime(timezone=True), server_default=func.now())
+
+class SSLCheck(Base):
+    __tablename__ = "ssl_checks"
+    id = Column(Integer, primary_key=True, index=True)
+    domain = Column(String, nullable=False)
+    days_to_expiry = Column(Integer, nullable=False)
+    is_valid = Column(Boolean, default=True)
+    last_checked = Column(DateTime(timezone=True), server_default=func.now())

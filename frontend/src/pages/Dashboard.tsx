@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { Server, Cpu, HardDrive, Network } from 'lucide-react';
 import InfrastructureHeatMap from '../components/ui/HeatMap';
+import DependencyMap from '../components/ui/DependencyMap';
 
 const mockCpuData = [
   { time: '10:00', value: 45 }, { time: '10:05', value: 55 }, 
@@ -73,6 +74,9 @@ export default function Dashboard() {
 
       {/* Advanced Features Row */}
       <InfrastructureHeatMap />
+      
+      {/* V2.1 Expansion: Service Dependency Mapping */}
+      <DependencyMap />
     </div>
   );
 }

@@ -25,14 +25,19 @@ def forecast_capacity(server_id: int):
             
         logger.info(f"Running capacity forecasting for server {server.hostname}...")
         
-        # Simulate ML prediction: Server will hit 100% disk in 45 days.
-        exhaustion_date = datetime.utcnow() + timedelta(days=45)
+        # Simulate ML prediction horizons
+        now = datetime.utcnow()
         
         prediction = {
             "server": server.hostname,
-            "metric": "disk_usage",
-            "predicted_exhaustion_date": exhaustion_date.strftime("%Y-%m-%d"),
-            "confidence": "87%"
+            "metric": "all_resources",
+            "horizons": {
+                "7_days": { "cpu_usage": 65, "ram_usage": 70, "storage": 45, "network_tb": 2.1 },
+                "30_days": { "cpu_usage": 80, "ram_usage": 85, "storage": 75, "network_tb": 10.5 },
+                "90_days": { "cpu_usage": 100, "ram_usage": 98, "storage": 100, "network_tb": 35.0 },
+            },
+            "exhaustion_warnings": ["CPU in 85 days", "Storage in 72 days"],
+            "confidence": "92%"
         }
         
         logger.info(f"Forecast Result: {prediction}")

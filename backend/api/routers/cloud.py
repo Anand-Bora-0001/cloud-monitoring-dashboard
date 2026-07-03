@@ -55,3 +55,24 @@ def trigger_azure_discovery(db: Session = Depends(deps.get_db), current_user: mo
 def trigger_gcp_discovery(db: Session = Depends(deps.get_db), current_user: models.User = Depends(deps.get_current_active_user)):
     from cloud.gcp_agent import discover_gcp_instances
     return discover_gcp_instances()
+
+@router.post("/discover/all")
+def trigger_unified_discovery(db: Session = Depends(deps.get_db), current_user: models.User = Depends(deps.get_current_active_user)):
+    from cloud.discovery_engine import AutoDiscoveryEngine
+    engine = AutoDiscoveryEngine()
+    resources = engine.discover_all()
+    
+    # Upsert resources into DB
+    for res in resources:
+        existing = db.query(models.CloudResource).filter(models.CloudResource.resource_id == res['resource_id']).first()
+        if not existing:
+            new_res = models.CloudResource(
+                provider=res['provider'],
+                resource_type=res['resource_type'],
+                resource_id=res['resource_id'],
+                name=res['name'],
+                status=res['status']
+            )
+            db.add(new_res)
+    db.commit()
+    return {"message": f"Discovered {len(resources)} unified resources across the stack.", "resources": resources}

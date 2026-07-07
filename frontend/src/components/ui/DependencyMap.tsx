@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 // Mock Dependency Data mimicking Datadog/Dynatrace maps
 const dependencies = [

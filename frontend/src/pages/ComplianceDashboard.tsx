@@ -1,10 +1,10 @@
-import React from 'react';
-import DashboardLayout from '../layouts/DashboardLayout';
+
+
 import { ShieldCheck, AlertOctagon, FileWarning, Clock } from 'lucide-react';
 
 export default function ComplianceDashboard() {
   return (
-    <DashboardLayout>
+    <>
       <div className="flex items-center space-x-3 mb-6">
         <div className="p-2 bg-emerald-500/20 rounded-lg">
           <ShieldCheck className="h-6 w-6 text-emerald-400" />
@@ -79,6 +79,6 @@ export default function ComplianceDashboard() {
           </ul>
         </div>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

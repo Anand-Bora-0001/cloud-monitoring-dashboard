@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 // Mock data representing server health status across different regions
 const mockRegions = [

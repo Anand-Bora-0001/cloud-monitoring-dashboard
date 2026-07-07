@@ -17,7 +17,7 @@ const SidebarItem = ({ to, icon: Icon, label }: { to: string; icon: any; label: 
   </NavLink>
 );
 
-export default function DashboardLayout() {
+export default function DashboardLayout({ children }: { children?: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-dark overflow-hidden">
       {/* Sidebar */}
@@ -58,7 +58,7 @@ export default function DashboardLayout() {
 
         {/* Dynamic Route Content */}
         <div className="flex-1 overflow-auto rounded-xl">
-          <Outlet />
+          {children || <Outlet />}
         </div>
       </main>
     </div>

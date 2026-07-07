@@ -1,6 +1,6 @@
-import React from 'react';
-import DashboardLayout from '../layouts/DashboardLayout';
-import { BrainCircuit, TrendingUp, AlertTriangle } from 'lucide-react';
+
+
+import { BrainCircuit, AlertTriangle } from 'lucide-react';
 
 const mockForecast = {
   horizons: {
@@ -13,7 +13,7 @@ const mockForecast = {
 
 export default function CapacityPlanning() {
   return (
-    <DashboardLayout>
+    <>
       <div className="flex items-center space-x-3 mb-6">
         <div className="p-2 bg-indigo-500/20 rounded-lg">
           <BrainCircuit className="h-6 w-6 text-indigo-400" />
@@ -55,6 +55,6 @@ export default function CapacityPlanning() {
           {mockForecast.warnings.map((w, i) => <li key={i}>{w}</li>)}
         </ul>
       </div>
-    </DashboardLayout>
+    </>
   );
 }

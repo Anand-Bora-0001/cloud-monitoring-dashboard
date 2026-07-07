@@ -4,6 +4,19 @@ An enterprise-grade, cloud-native monitoring and observability solution designed
 
 ---
 
+## 📸 Platform Previews
+
+### Global Dashboard & Topology
+![Global Dashboard](docs/dashboard.png)
+
+### AI Capacity Planning
+![Capacity Planning](docs/capacity_planning.png)
+
+### Compliance & Security
+![Compliance Dashboard](docs/compliance.png)
+
+---
+
 ## 🏗️ Architecture & Structure Diagram
 
 The platform leverages a distributed, microservices-oriented architecture with asynchronous workers and synthetic monitoring loops.

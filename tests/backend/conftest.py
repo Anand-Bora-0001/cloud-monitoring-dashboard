@@ -8,6 +8,7 @@ import os
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '../../backend')))
 
 from database import Base
+import models
 from main import app
 from api.deps import get_db
 

@@ -1,15 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.js";
 
 @layer base {
   body {
-    @apply bg-dark text-slate-100 font-sans antialiased;
+    @apply bg-[#0f172a] text-slate-100 font-sans antialiased;
   }
 }
 
 @layer utilities {
   .glass-panel {
-    @apply bg-panel/80 backdrop-blur-md border border-white/10 shadow-xl rounded-xl;
+    @apply bg-[#1e293b]/80 backdrop-blur-md border border-white/10 shadow-xl rounded-xl;
   }
 }
